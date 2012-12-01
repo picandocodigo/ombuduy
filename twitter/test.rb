@@ -18,8 +18,16 @@ class Array
   end
 end
 
-TweetStream::Client.new.track('#DAL', '#DAL2012') do |status|
-  puts "#{status.text}"
-  puts status.inspect 
+TweetStream::Client.new.track('#OmbudUy', '#OMBUDUY') do |status|
+
+  # require 'debugger'; debugger
+  if status.attrs[:retweeted_status] 
+    puts 'es un retweet'
+  elsif status.attrs[:in_reply_to_status_id_str] 
+    puts 'es un reply'
+  else 
+    puts 'es uno nuevo'
+  end
+
 end
 
