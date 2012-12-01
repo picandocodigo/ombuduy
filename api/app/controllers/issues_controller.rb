@@ -8,11 +8,11 @@ class IssuesController < ApplicationController
   end
 
   def show
-    render json: Issues.find(params["id"])
+    render json: Issue.find(params["id"])
   end
 
   def index
-    render json: Issues.all.order(:relevance).limit(20)
+    render json: Issue.all.order(:relevance).limit(20)
   end
 
   def edit
