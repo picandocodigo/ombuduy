@@ -30,10 +30,37 @@ class TwitterController < ApplicationController
   end
 
   def reply
-    issue = Issue.where(twitter_id: "reply_to_id").first
-    reply = Reply.new()
+    issue = give_relevance(params['reply_to_id'])
+    reply = Reply.new(
+                      issue_id: issue.id,
+                      message: params["message"],
+                      tweet_id: params["tweet_id"],
+                      reply_to_id: params["reply_to_id"],
+                      user_id: params["user_id"],
+                      image_url: params["image_url"]
+                      )
+
+    if issue.save && reply.save
+      render status: 201
+    else
+      render status: 400
+    end
   end
 
   def rt
+    issue = self.give_relevance(params['reply_to_id'])
+    if issue.save
+      render status: 201
+    else
+      render status: 400
+    end
+  end
+
+  private
+
+  def give_relevance(reply_to_id)
+    issue = Issue.where(twitter_id: reply_to_id).first
+    issue.relevance += 1
+    issue
   end
 end
