@@ -17,8 +17,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 group :development, :test do
+  gem 'nifty-generators'
   gem 'debugger'
 end
 
