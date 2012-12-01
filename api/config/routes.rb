@@ -5,4 +5,5 @@ Api::Application.routes.draw do
   post 'twitter/rt' => 'twitter#rt'
 
   resources :issues
+  resources :tags
 end
