@@ -7,6 +7,7 @@ class CreateIssues < ActiveRecord::Migration
       t.decimal :longitude
       t.decimal :latitude
       t.string  :image_url
+      t.integer :tweet_id
       t.timestamps
     end
   end
