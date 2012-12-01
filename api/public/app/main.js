@@ -1,7 +1,3 @@
-for (i in Application.Routers) {
-  if (Application.Routers.hasOwnProperty(i)) {
-    Application.Routers[i]();
-  }
-}
+new Application.Routers.IssuesRouter();
 
 Backbone.history.start();
