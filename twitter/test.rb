@@ -20,5 +20,6 @@ end
 
 TweetStream::Client.new.track('#DAL', '#DAL2012') do |status|
   puts "#{status.text}"
+  puts status.inspect 
 end
 
