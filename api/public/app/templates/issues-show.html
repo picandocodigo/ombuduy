@@ -1,0 +1,56 @@
+<h1><%= issue.get('text') %></h1>
+
+<div class="info">
+  <h2>Informacion</h2>
+  <dl>
+    <dt>Direccion</dt>
+    <% if (!!issue.get('address')) { %>
+    <dd><%= issue.get('address') %></dd>
+    <% } else { %>
+    <dd><a href="">Agregale una direccion</a></dd>
+    <% } %>
+    <dt>Mapa</dt>
+    <% if (!!issue.get('latitude') && !!issue.get('longitude')) { %>
+    <dd><%= issue.get('latitude') %>:<%= issue.get('longitude') %></dd>
+    <% } else { %>
+    <dd><a href="">Agregale un mapa</a></dd>
+    <% } %>
+  </dl>
+</div>
+
+<div class="pics">
+  <h2>Fotos</h2>
+  <ul>
+    <li><img src="https://secure.gravatar.com/avatar/3e9297646b9cb2d449fdffd861526b20?s=70" /></li>
+    <li><img src="https://secure.gravatar.com/avatar/3e9297646b9cb2d449fdffd861526b20?s=70" /></li>
+    <li><img src="https://secure.gravatar.com/avatar/3e9297646b9cb2d449fdffd861526b20?s=70" /></li>
+    <li><img src="https://secure.gravatar.com/avatar/3e9297646b9cb2d449fdffd861526b20?s=70" /></li>
+  </ul>
+  <a href="">Agregale una foto</a>
+</div>
+
+<div class="activity">
+  <h2>Actividad</h2>
+  <ul>
+    <li><strong>Tu hermana</strong> agrego una foro al issue... Salame</li>
+    <li><strong>Tu hermana</strong> agrego una foro al issue... Salame</li>
+    <li><strong>Tu hermana</strong> agrego una foro al issue... Salame</li>
+    <li><strong>Tu hermana</strong> agrego una foro al issue... Salame</li>
+    <li><strong>Tu hermana</strong> agrego una foro al issue... Salame</li>
+  </ul>
+</div>
+
+<div class="feedback">
+  <h2>Feedback</h2>
+  <p>Relevancia: <%= issue.get('relevance') || 0 %></p>
+  <p>Arreglado: <%= issue.get('fixed') || 0 %></p>
+</div>
+
+<div class="replies">
+  <h2>Respuestas</h2>
+  <ol>
+    <li><strong>Tu hermana</strong> dice que este pozo es muy profundo</li>
+    <li><strong>Tu hermana</strong> dice que este pozo es muy profundo</li>
+    <li><strong>Tu hermana</strong> dice que este pozo es muy profundo</li>
+  </ol>
+</div>

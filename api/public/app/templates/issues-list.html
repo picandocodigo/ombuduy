@@ -1,0 +1,8 @@
+<ul>
+  <% _.each(issues, function(issue) { %>
+  <li>
+    <p><%= issue.get('text') %></p>
+    <a href="#/issue/<%= issue.get('id') %>">Ver issue</a>
+  </li>
+  <% }) %>
+</ul>
