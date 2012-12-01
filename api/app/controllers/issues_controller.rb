@@ -12,7 +12,7 @@ class IssuesController < ApplicationController
   end
 
   def index
-    render json: Issue.all.order(:relevance).limit(20)
+    render json: Issue.order(:relevance).limit(20)
   end
 
   def edit

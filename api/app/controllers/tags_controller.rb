@@ -12,7 +12,7 @@ class TagsController < ApplicationController
   end
 
   def index
-    render json: Tag.all.order(:relevance).limit(20)
+    render json: Tag.limit(20)
   end
 
   def edit

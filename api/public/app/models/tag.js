@@ -1,5 +1,5 @@
-Application.Models.Tags = Backbone.Model.extend({
-  
-  urlRoot: 'tuhermana'
-
+Application.Models.Tag = Backbone.Model.extend({
+  urlRoot: '/tag/',
+  initialize: function () {
+  }
 });

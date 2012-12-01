@@ -7,14 +7,20 @@ Application.Views.IssuesList = Backbone.View.extend({
   },
 
   render: function () {
-    this.collection.fetch({
-      success: function () {
-        $.loadTemplate(this, function (html) {
-           console.log(html);
-        });
-      }
+    var that = this;
+    $.loadTemplate(this, function (html) {
+      var template = _.template(html, {
+        issues: that.collection.models
+      });
+      that.$el.html(template).show();
     });
+  },
 
+  setCollection: function (collection) {
+    this.collection = collection;
+    this.collection.fetch({
+      success: this.render
+    });
   }
 
 });
