@@ -1,19 +1,4 @@
 /**
- * Gives the object a method getInstance
- * to manage the instance and get a
- * singleton.
- */
-$.makeSingleton = function(o) {
-  o.liveInstance = null;
-  o.getInstance = function (params) {
-    if (o.liveInstance === null) {
-      o.liveInstance = new o(params);
-    }
-    return o.liveInstance;
-  };
-};
-
-/**
  * Loads a template if the object hasnt
  * loaded it before, and then runs the 
  * callback
