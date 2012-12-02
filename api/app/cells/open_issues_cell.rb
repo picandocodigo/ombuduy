@@ -1,7 +1,7 @@
 class OpenIssuesCell < Cell::Rails
 
   def display
-    @issues = Issue.order(:relevance).limit(20)
+    @issues = Issue.order("fixed ASC").limit(20)
     render
   end
 
