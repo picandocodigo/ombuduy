@@ -59,7 +59,7 @@ class TweetDriver
 
     url = @config['api_host'] + '/twitter/rt'
     data = {
-      tweet_id: status.attrs['retweeted_status']['id_str']
+      tweet_id: status.attrs[:retweeted_status][:id_str]
     }
 
     puts data
