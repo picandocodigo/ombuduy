@@ -10,11 +10,16 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
   def apply_omniauth(omniauth)
-    self.email = omniauth['user_info']['email'] if email.blank?
+    self.screenname = omniauth['extra']['access_token'].params['screen_name']  	    	    
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
   
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+  
+  def email_required?
+      (authentications.empty? || !email.blank?) && super
+  end
+  
 end
