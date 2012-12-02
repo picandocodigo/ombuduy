@@ -1,0 +1,9 @@
+api_host: http://google.com/?q=desarrollandoamericalatina
+api_www:  http://OmbudUy.com
+twitter:
+  consumer_key       : '#############'
+  consumer_secret    : '##################################################'
+  oauth_token        : '############=#####################################'
+  oauth_token_secret : '#################################################'
+  hashtags           : [ '#ombuduy', '#OMBUDUY', '#OmbudUy', '#OmbudUY', '#ombudUY', '#ombudUy' ]
+

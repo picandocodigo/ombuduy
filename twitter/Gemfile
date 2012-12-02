@@ -1,0 +1,6 @@
+source 'http://rubygems.org'
+
+gem 'tweetstream'
+gem 'sidekiq'
+gem 'em-http-request'
+gem 'geocoder'
