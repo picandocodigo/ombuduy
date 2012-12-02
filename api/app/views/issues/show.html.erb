@@ -1,0 +1,46 @@
+<div>
+<h1>Issue #<%= @issue.id %></h1>
+<p><%= @issue.text %></p>
+
+<% if @issue.latitude && @issue.longitude %>
+<div id="mapdiv" style="height:500px; width: 500px;"></div>
+
+<script>
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+    //-34.878842,-56.076877
+    var lonLat = new OpenLayers.LonLat( <%= @issue.longitude %>, <%= @issue.latitude %> )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+ 
+    var zoom=16;
+ 
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+ 
+    markers.addMarker(new OpenLayers.Marker(lonLat));
+ 
+    map.setCenter (lonLat, zoom);
+</script>
+<% end %>
+
+<h3>Foto</h3>
+
+<% if @issue.image_url%>
+<img src="<%= @issue.image_url %>"/>
+<% end %>
+
+<div class="issue-fix-panel">
+  <%= link_to "fix", fix_issue_path(@issue) %>
+  <%= link_to "unfix", unfix_issue_path(@issue) %>
+  <p>
+    <%= "Ranking: #{@issue.fixed}" %>
+  </p>
+</div>
+
+add more info
+reteew
+reply
+</div>

@@ -8,7 +8,8 @@ class IssuesController < ApplicationController
   end
 
   def show
-    render json: Issue.find(params["id"])
+    @issue = Issue.find(params["id"])
+    render
   end
 
   def index
@@ -26,4 +27,20 @@ class IssuesController < ApplicationController
   def destroy
     render status: 405
   end
+  
+  def fix
+    # TODO clean variables, control save action
+    issue = Issue.find(params["id"])
+    issue.fixed += 1
+    issue.save
+    redirect_to issue
+  end
+  
+  def unfix
+    issue = Issue.find(params["id"])
+    issue.fixed -= 1
+    issue.save
+    redirect_to issue
+  end
+
 end

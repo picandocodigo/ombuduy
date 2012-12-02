@@ -22,3 +22,7 @@ body {
 .login-form label {
 	display: inline;
 }
+
+.olTileImage {
+	max-width: 256%;
+}

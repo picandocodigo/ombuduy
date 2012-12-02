@@ -23,16 +23,16 @@ ActiveRecord::Schema.define(:version => 20121202073204) do
 
   create_table "issues", :force => true do |t|
     t.integer  "fixed"
-    t.integer  "relevance",                 :default => 0
+    t.integer  "relevance",  :default => 0
     t.string   "address"
     t.decimal  "longitude"
     t.decimal  "latitude"
     t.string   "image_url"
-    t.integer  "tweet_id",   :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "text"
     t.integer  "user_id"
+    t.string   "tweet_id"
   end
 
   create_table "issues_tags", :force => true do |t|
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20121202073204) do
     t.string   "twitter_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  :default => ""
+    t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
