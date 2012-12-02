@@ -1,6 +1,6 @@
 <h1 id="open_issues">Open Issues</h1>
-<% unless @open_issues.nil? %>
-  <% @open_issues.each do |oi| %>
-    <p><%= oi.text %></p>
+<% unless @issues.nil? %>
+  <% @issues.each do |issue| %>
+    <p><a href=<%= "/issues/#{issue.id}" %>><%= issue.text %></a></p>
   <% end %>
 <% end %>
