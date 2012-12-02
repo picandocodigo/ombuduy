@@ -68,7 +68,7 @@ class TweetDriver
     }
 
     puts data
-    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
+    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data
   end
 
   def reply(status)
@@ -85,16 +85,15 @@ class TweetDriver
     }
 
     puts data
-    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
+    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data
   end
 
   def new(status)
-
     if status.attrs[:geo]
       case status.attrs[:geo][:type]
       when "Point" then
-        latitude = status.attrs[:geo][:coordinates][0]
-        longitude = status.attrs[:geo][:coordinates][1]
+        latitude = status.attrs[:geo][:coordinates][0].to_s
+        longitude = status.attrs[:geo][:coordinates][1].to_s
       when "Polygon" then
         center = Geocoder::Calculations.geographic_center(
                                                           status.attrs[:geo][:coordinates][0],
@@ -102,7 +101,7 @@ class TweetDriver
                                                           status.attrs[:geo][:coordinates][2],
                                                           status.attrs[:geo][:coordinates][3]
                                                           )
-        latitude, longitude = center[0], center[1]
+        latitude, longitude = center[0].to_s, center[1].to_s
       end
     end
 
@@ -120,7 +119,7 @@ class TweetDriver
 
     puts data
 
-    http = EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
+    http = EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data
     http.callback {
       Twitter.update( '@' + status.attrs[:user][:screen_name] + ' tu issue fue creado en ' + @config['api_www'] + http.response + ' #OmbudUy')
     }
