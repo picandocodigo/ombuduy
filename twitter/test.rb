@@ -2,6 +2,7 @@ require 'tweetstream'
 require 'yaml'
 require 'json'
 require 'geocoder'
+require 'em-http-request'
 
 class Array
   def extract_options!
@@ -37,13 +38,15 @@ class TweetDriver
   def run
     @client.track(@config['twitter']['hashtags']) do |status|
 
-      require 'debugger'; debugger
+      require 'debugger';
 
       if status.attrs[:retweeted_status] 
         puts 'es un retweet'
+        debugger
         self.retweet(status)
       elsif status.attrs[:in_reply_to_status_id_str] 
         puts 'es un reply'
+        debugger
         self.reply(status)
       else 
         puts 'es uno nuevo'
@@ -63,6 +66,7 @@ class TweetDriver
     }
 
     puts data
+    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
   end
 
   def reply(status)
@@ -79,6 +83,7 @@ class TweetDriver
     }
 
     puts data
+    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
   end
 
   def new(status)
@@ -106,11 +111,12 @@ class TweetDriver
       image_url: img,
       latitude: latitude,
       longitude: longitude,
-      twitter_id: status.attrs[:id_str],
+      tweet_id: status.attrs[:id_str],
       user_id: status.attrs[:user][:id_str]
     }
 
     puts data
+    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
   end
 
   def post(json, uri)
