@@ -44,6 +44,7 @@ class TwitterController < ApplicationController
       else
         render text: reply.errors, status: 400
       end
+    else
       render text: "Error", status: 400
     end
   end
@@ -52,9 +53,12 @@ class TwitterController < ApplicationController
     unless (issue = give_relevance(params['tweet_id'])).nil?
       if issue.save
         render text: "OK", status: 201
+      else
+        render text: issue.errors, status: 400
       end
+    else
+      render text: "Error", status: 400
     end
-    render text: "Error", status: 400
   end
 
   private
