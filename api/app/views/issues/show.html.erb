@@ -2,7 +2,7 @@
 <h1>Issue #<%= @issue.id %></h1>
 <p><%= @issue.text %></p>
 
-<% if @issue.latitude && @issue.longitude %>
+<% if @issue.latitude != 0  && @issue.longitude != 0 %>
 <div id="mapdiv" style="height:500px; width: 500px;"></div>
 
 <script>
