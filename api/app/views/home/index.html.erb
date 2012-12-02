@@ -1,6 +1,8 @@
 <h1>Ombud</h1>
 <%= image_tag("logo.png", class: "pull-right") %>
-<p>Ombud es un sistema que actúa como <em>Ombudsman</em> entre tú y los entes estatales encargados de cuidar tu ciudad. Te ayuda a informarlos de problemas, desde calles en mal estado, basura, rincones o esquinas en mal estado o peligrosas y demás.</p>
+<p>Ombud es un sistema que actúa como <em>Ombudsman</em> entre tú y los entes estatales encargados de cuidar tu ciudad. Te ayuda a informarlos de problemas como calles en mal estado, basura, alumbrado público dañado o situaciones peligrosas en tu barrio.</p>
+<p>La idea es catalogar la información y hacer llegar los reportes de incidentes a las entidades o personas que puedan darle una solución. Los datos generados son abiertos y usamos la tecnología de datos abiertos de OpenStreetMap para proveer geolocalizaci&oacute;n a la informaci&oacute;n.
+</p>
 <h3>Reportes</h3>
 <% @issues.each do |issue| %>
   <p>
