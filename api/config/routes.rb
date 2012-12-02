@@ -11,6 +11,7 @@ Api::Application.routes.draw do
   post 'twitter/rt' => 'twitter#rt'
   
   resources :authentications
+
   resources :issues do
     member do
       get 'fix'

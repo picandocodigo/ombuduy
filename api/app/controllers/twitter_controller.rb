@@ -65,6 +65,7 @@ class TwitterController < ApplicationController
 
   def give_relevance(tweet_id)
     unless (issue = Issue.where(tweet_id: tweet_id).first).nil?
+      issue.relevance ||= 0
       issue.relevance += 1
       issue
     end
