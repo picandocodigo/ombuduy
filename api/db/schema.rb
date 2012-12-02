@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20121202073204) do
     t.string   "twitter_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  :default => ""
+    t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
