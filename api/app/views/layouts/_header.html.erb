@@ -1,0 +1,40 @@
+<!-- START HEADER -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="brand" href="#">OmbudUY</a>
+      <div class="nav-collapse collapse">
+        <!-- START LOGIN FORM -->
+        <div class="navbar-text pull-right login-form">
+        <% if user_signed_in? %>  
+          Signed in as <%= current_user.email.blank? ? current_user.screenname  : current_user.email %>. Not you?  
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <% else %>  
+          <%= form_for "user", :url => user_session_path do |f| %>
+            <fieldset class="login-form">
+              <div style="display: inline-block;">
+                <%= f.text_field :email %>
+                <%= f.password_field :password %>
+              </div>
+              <div style="display: inline-block;  ">
+                <%= f.label :remember_me %>
+                <%= f.check_box :remember_me %>
+                <%= f.submit 'Sign in', :class => "button" %>
+              </div>
+              <div>
+                <%= link_to  'Olvidaste tu password?', new_password_path('user')  %>
+                <%= link_to new_user_registration_path, :id => 'lnk_registration' do %>
+                <strong class="font-weight-bold">Registrate</strong>
+                <% end %>
+                <%= link_to "Sign in with Twitter", "/auth/twitter" %>
+              </div>
+            </fieldset>
+          <% end %>
+        <% end %>
+        </div>
+        <!-- END LOGIN FORM -->
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<!-- START HEADER -->

@@ -1,0 +1,6 @@
+<h2>Tag <%= @tag.title %></h2>
+<% @tag.issues.each do |issue| %>
+  <div style="border: 1px solid #000">
+    <p><%= issue.text %></p>
+  </div>
+<% end %>
