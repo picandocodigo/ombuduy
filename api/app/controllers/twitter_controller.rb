@@ -8,7 +8,7 @@ class TwitterController < ApplicationController
                       image_url: params["image_url"],
                       latitude: params["latitude"].to_f,
                       longitude: params["longitude"].to_f,
-                      twitter_id: params["twitter_id"],
+                      tweet_id: params["tweet_id"],
                       user_id: user.id
                       )
 
@@ -58,7 +58,7 @@ class TwitterController < ApplicationController
   private
 
   def give_relevance(reply_to_id)
-    issue = Issue.where(twitter_id: reply_to_id).first
+    issue = Issue.where(tweet_id: reply_to_id).first
     issue.relevance += 1
     issue
   end
