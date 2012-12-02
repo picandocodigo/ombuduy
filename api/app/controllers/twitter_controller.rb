@@ -49,8 +49,8 @@ class TwitterController < ApplicationController
   end
 
   def rt
-    issue = self.give_relevance(params['reply_to_id'])
-    if issue.save
+    unless (issue = give_relevance(params['reply_to_id'])).nil?
+      issue.save
       render status: 201
     else
       render status: 400
