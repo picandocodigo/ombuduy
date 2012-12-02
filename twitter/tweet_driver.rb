@@ -31,6 +31,13 @@ class TweetDriver
       c.auth_method        = :oauth
     end
 
+    Twitter.configure do |c|
+      c.consumer_key       = @config['twitter']['consumer_key'] 
+      c.consumer_secret    = @config['twitter']['consumer_secret']
+      c.oauth_token        = @config['twitter']['oauth_token']
+      c.oauth_token_secret = @config['twitter']['oauth_token_secret']
+    end
+
     @client = TweetStream::Client.new
 
   end
@@ -38,17 +45,19 @@ class TweetDriver
   def run
     @client.track(@config['twitter']['hashtags']) do |status|
 
-      if status.attrs[:retweeted_status] 
-        puts 'es un retweet'
-        self.retweet(status)
-      elsif status.attrs[:in_reply_to_status_id_str] 
-        puts 'es un reply'
-        self.reply(status)
-      else 
-        puts 'es uno nuevo'
-        self.new(status)
-      end
-     end
+      unless status.attrs[:user][:screen_name] == 'ombuduy' 
+        if status.attrs[:retweeted_status] 
+          puts 'es un retweet'
+          self.retweet(status)
+        elsif status.attrs[:in_reply_to_status_id_str] 
+          puts 'es un reply'
+          self.reply(status)
+        else 
+          puts 'es uno nuevo'
+          self.new(status)
+        end
+       end
+    end
   end
 
   def retweet(status)
@@ -80,6 +89,7 @@ class TweetDriver
   end
 
   def new(status)
+
     if status.attrs[:geo]
       case status.attrs[:geo][:type]
       when "Point" then
@@ -109,15 +119,11 @@ class TweetDriver
     }
 
     puts data
-    EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
-  end
 
-  def post(json, uri)
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
-    request.body = json 
-    response = http.request(request)
-    response
+    http = EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
+    http.callback {
+      Twitter.update( '@' + status.attrs[:user][:screen_name] + ' tu issue fue creado en ' @config.api_www + http.response + ' #OmbudUy')
+    }
   end
 
 end
