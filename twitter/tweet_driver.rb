@@ -72,10 +72,14 @@ class TweetDriver
   end
 
   def reply(status)
-    unless status.attrs[:entities].nil?
-      img =  (status.attrs[:entities][:media][0][:media_url_https] || '')
+
+    unless  status.attrs[:entities].nil? ||  
+            status.attrs[:entities][:media].nil? ||
+            status.attrs[:entities][:media][0].nil? ||
+            status.attrs[:entities][:media][0][:media_url_http].nil?
+      img =  status.attrs[:entities][:media][0][:media_url_https]
     else
-      img = ''
+      img = nil
     end
 
     url = @config['api_host'] + '/twitter/reply'
@@ -108,8 +112,11 @@ class TweetDriver
       end
     end
 
-    unless status.attrs[:entities].nil?
-      img =  (status.attrs[:entities][:media][0][:media_url_https] || '')
+    unless  status.attrs[:entities].nil? ||  
+            status.attrs[:entities][:media].nil? ||
+            status.attrs[:entities][:media][0].nil? ||
+            status.attrs[:entities][:media][0][:media_url_http].nil?
+      img =  status.attrs[:entities][:media][0][:media_url_https]
     else
       img = nil
     end
