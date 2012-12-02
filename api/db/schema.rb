@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201200317) do
+ActiveRecord::Schema.define(:version => 20121202023508) do
 
   create_table "issues", :force => true do |t|
     t.integer  "fixed"
@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(:version => 20121201200317) do
     t.decimal  "longitude"
     t.decimal  "latitude"
     t.string   "image_url"
+    t.integer  "tweet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "text"
     t.integer  "user_id"
-    t.string   "twitter_id"
+    t.string   "tweets_id"
   end
 
   create_table "issues_tags", :force => true do |t|
