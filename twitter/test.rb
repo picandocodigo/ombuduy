@@ -56,6 +56,9 @@ class TweetDriver
   end
 
   def retweet(status)
+
+    img = status.attrs[:media][:media_url_https] || '' unless status.attrs[:media].nil?
+
     url = @config['api_host'] + '/twitter/rt'
     data = {
       twitter_reply: status.attrs[:in_reply_to_status_id_str], 
