@@ -24,7 +24,7 @@ class TwitterController < ApplicationController
     if issue.save
       render json: "/issues/#{issue.id}", status: 201
     else
-      render status: 400
+      render text: "Error", status: 400
     end
   end
 
@@ -40,21 +40,21 @@ class TwitterController < ApplicationController
                         )
 
       if reply.save
-        render status: 201
+        render text: "OK", status: 201
       else
-        render status: 400
+        render text: reply.errors, status: 400
       end
-      render status: 400
+      render text: "Error", status: 400
     end
   end
 
   def rt
     unless (issue = give_relevance(params['tweet_id'])).nil?
-      issue.save
-      render status: 201
-    else
-      render status: 400
+      if issue.save
+        render text: "OK", status: 201
+      end
     end
+    render text: "Error", status: 400
   end
 
   private
