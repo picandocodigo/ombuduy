@@ -8,7 +8,9 @@ class TagsController < ApplicationController
   end
 
   def show
-    render json: Tag.find(params["id"])
+    @tag = Tag.find(params["id"])
+    Rails.logger.info @tag.issues
+    render
   end
 
   def index

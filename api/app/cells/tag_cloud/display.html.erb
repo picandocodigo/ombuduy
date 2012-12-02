@@ -1,6 +1,6 @@
 <h2>Tags</h2>
 <% unless @tags.nil? %>
   <% @tags.each do |tag| %>
-    <p><%= tag.title %></p>
+    <span><%= link_to tag.title, tag_path(tag) %></span>
   <% end %>
 <% end %>
