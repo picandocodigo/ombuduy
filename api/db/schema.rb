@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201231829) do
+ActiveRecord::Schema.define(:version => 20121202031703) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -23,16 +23,16 @@ ActiveRecord::Schema.define(:version => 20121201231829) do
 
   create_table "issues", :force => true do |t|
     t.integer  "fixed"
-    t.integer  "relevance"
+    t.integer  "relevance",                 :default => 0
     t.string   "address"
     t.decimal  "longitude"
     t.decimal  "latitude"
     t.string   "image_url"
+    t.integer  "tweet_id",   :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "text"
     t.integer  "user_id"
-    t.string   "twitter_id"
   end
 
   create_table "issues_tags", :force => true do |t|
