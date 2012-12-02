@@ -72,7 +72,7 @@ class TweetDriver
   end
 
   def reply(status)
-    unless status.attrs[:media].nil?
+    unless status.attrs[:entities].nil?
       img =  (status.attrs[:entities][:media][0][:media_url_https] || '')
     else
       img = ''
@@ -108,7 +108,7 @@ class TweetDriver
       end
     end
 
-    unless status.attrs[:media].nil?
+    unless status.attrs[:entities].nil?
       img =  (status.attrs[:entities][:media][0][:media_url_https] || '')
     else
       img = nil
