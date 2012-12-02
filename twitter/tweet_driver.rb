@@ -38,15 +38,11 @@ class TweetDriver
   def run
     @client.track(@config['twitter']['hashtags']) do |status|
 
-      require 'debugger';
-
       if status.attrs[:retweeted_status] 
         puts 'es un retweet'
-        # debugger
         self.retweet(status)
       elsif status.attrs[:in_reply_to_status_id_str] 
         puts 'es un reply'
-        # debugger
         self.reply(status)
       else 
         puts 'es uno nuevo'
