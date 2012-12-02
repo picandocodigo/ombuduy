@@ -1,15 +1,14 @@
 class TwitterController < ApplicationController
   def new
-    data = ActiveSupport::JSON.decode(params["_json"])
-    if (user = User.where(twitter_user_id: data["user_id"])).first.nil?
-      user = User.create(twitter_user_id: data["user_id"].to_i)
+    if (user = User.where(twitter_user_id: params["user_id"])).first.nil?
+      user = User.create(twitter_user_id: params["user_id"].to_i)
     end
     issue = Issue.new(
-                      text: data["text"],
-                      image_url: data["image_url"],
-                      latitude: data["latitude"].to_f,
-                      longitude: data["longitude"].to_f,
-                      twitter_id: data["twitter_id"],
+                      text: params["text"],
+                      image_url: params["image_url"],
+                      latitude: params["latitude"].to_f,
+                      longitude: params["longitude"].to_f,
+                      twitter_id: params["twitter_id"],
                       user_id: user.id
                       )
 
