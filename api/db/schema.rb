@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202024910) do
+ActiveRecord::Schema.define(:version => 20121202031703) do
 
   create_table "issues", :force => true do |t|
     t.integer  "fixed"
-    t.integer  "relevance"
+    t.integer  "relevance",                 :default => 0
     t.string   "address"
     t.decimal  "longitude"
     t.decimal  "latitude"
