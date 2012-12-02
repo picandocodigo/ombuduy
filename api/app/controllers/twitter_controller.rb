@@ -1,6 +1,6 @@
 class TwitterController < ApplicationController
   def new
-    if (user = User.where(twitter_user_id: params["user_id"])).first.nil?
+    if (user = User.where(twitter_user_id: params["user_id"]).first).nil?
       user = User.create(twitter_user_id: params["user_id"].to_i)
     end
     issue = Issue.new(
