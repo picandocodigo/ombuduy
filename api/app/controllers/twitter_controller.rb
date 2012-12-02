@@ -49,7 +49,7 @@ class TwitterController < ApplicationController
   end
 
   def rt
-    unless (issue = give_relevance(params['reply_to_id'])).nil?
+    unless (issue = give_relevance(params['tweet_id'])).nil?
       issue.save
       render status: 201
     else
@@ -59,8 +59,8 @@ class TwitterController < ApplicationController
 
   private
 
-  def give_relevance(reply_to_id)
-    unless (issue = Issue.where(tweet_id: reply_to_id).first).nil?  
+  def give_relevance(tweet_id)
+    unless (issue = Issue.where(tweet_id: tweet_id).first).nil?
       issue.relevance += 1
       issue
     end
