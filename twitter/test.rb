@@ -42,11 +42,11 @@ class TweetDriver
 
       if status.attrs[:retweeted_status] 
         puts 'es un retweet'
-        debugger
+        # debugger
         self.retweet(status)
       elsif status.attrs[:in_reply_to_status_id_str] 
         puts 'es un reply'
-        debugger
+        # debugger
         self.reply(status)
       else 
         puts 'es uno nuevo'
@@ -61,7 +61,7 @@ class TweetDriver
       twitter_reply: status.attrs[:in_reply_to_status_id_str], 
       message: status.attrs[:text], 
       tweet_id: status.attrs[:id_str], 
-      user_id: status.attrs[:user][:in_reply_to_status_id_str], 
+      user_id: status.attrs[:user][:id_str]
       image_url: status.attrs[:media][:media_url_https]
     }
 
@@ -78,7 +78,7 @@ class TweetDriver
       message: status.attrs[:text], 
       tweet_id: status.attrs[:id_str], 
       reply_to_id: status.attrs[:in_reply_to_status_id_str],
-      user_id: status.attrs[:user][:in_reply_to_status_id_str], 
+      user_id: status.attrs[:user][:id_str]
       image_url: img,
     }
 
