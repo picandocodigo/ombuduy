@@ -120,9 +120,12 @@ class TweetDriver
 
     puts data
 
+    require 'debugger'; debugger
+    puts @config.api_www
+
     http = EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data.to_json 
     http.callback {
-      Twitter.update( '@' + status.attrs[:user][:screen_name] + ' tu issue fue creado en ' + @config.api_www + http.response + ' #OmbudUy')
+      Twitter.update( '@' + status.attrs[:user][:screen_name] + ' tu issue fue creado en ' + @config['api_www'] + http.response + ' #OmbudUy')
     }
   end
 
