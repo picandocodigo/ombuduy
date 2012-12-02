@@ -29,19 +29,21 @@ class TwitterController < ApplicationController
   end
 
   def reply
-    issue = give_relevance(params['reply_to_id'])
-    reply = Reply.new(
-                      issue_id: issue.id,
-                      message: params["message"],
-                      tweet_id: params["tweet_id"],
-                      reply_to_id: params["reply_to_id"],
-                      user_id: params["user_id"],
-                      image_url: params["image_url"]
-                      )
+    unless (issue = give_relevance(params['reply_to_id'])).nil?
+      reply = Reply.new(
+                        issue_id: issue.id,
+                        message: params["message"],
+                        tweet_id: params["tweet_id"],
+                        reply_to_id: params["reply_to_id"],
+                        user_id: params["user_id"],
+                        image_url: params["image_url"]
+                        )
 
-    if issue.save && reply.save
-      render status: 201
-    else
+      if reply.save
+        render status: 201
+      else
+        render status: 400
+      end
       render status: 400
     end
   end
@@ -58,8 +60,10 @@ class TwitterController < ApplicationController
   private
 
   def give_relevance(reply_to_id)
-    issue = Issue.where(tweet_id: reply_to_id).first
-    issue.relevance += 1
-    issue
+    unless (issue = Issue.where(tweet_id: reply_to_id).first).nil?  
+      issue.relevance += 1
+      issue
+    end
   end
+
 end
