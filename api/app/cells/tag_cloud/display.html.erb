@@ -1,0 +1,6 @@
+<h2>Tags</h2>
+<% unless @tags.nil? %>
+  <% @tags.each do |tag| %>
+    <p><%= tag.title %></p>
+  <% end %>
+<% end %>

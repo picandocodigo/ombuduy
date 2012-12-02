@@ -5,3 +5,20 @@
  *= require_self
  *= require_tree . 
 */
+body {
+	background-color: #000;
+	padding-top: 120px;
+	padding-bottom: 40px;
+}
+
+.display-inline {
+	width: 800px;
+}
+
+.display-inline input {
+	display: inline;
+}
+
+.login-form label {
+	display: inline;
+}

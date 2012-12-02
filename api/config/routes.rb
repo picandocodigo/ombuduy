@@ -1,5 +1,7 @@
 Api::Application.routes.draw do
 
+  get "home/index"
+
   match '/auth/:provider/callback' => 'authentications#create'
   
   devise_for :users, :controllers => {:registrations => 'registrations'}
@@ -11,4 +13,7 @@ Api::Application.routes.draw do
   resources :authentications
   resources :issues
   resources :tags
+
+  root :to => 'home#index'
+
 end
