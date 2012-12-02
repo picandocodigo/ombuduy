@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Api</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Api</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" type="text/css" media="screen" title="no title" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css" type="text/css" media="screen" title="no title" />
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render :partial => '/layouts/header' %>
+    <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span4">
+              <div class="well sidebar-nav">
+                <%= render :partial => '/layouts/sidebar'%> 
+              </div><!--/.well -->
+            </div><!--/span-->
+            <div class="span8">
+              <div class="hero-unit">
+                <%= yield %>
+              </div>
+            </div><!--/span-->
+          </div><!--/row-->
 
-<%= yield %>
+          <hr>
 
-</body>
+          <footer>
+            <p>&copy; Company 2012</p>
+          </footer>
+
+        </div><!--/.fluid-container-->
+    
+  </body>
 </html>

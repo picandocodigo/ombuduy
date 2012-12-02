@@ -1,0 +1,6 @@
+<h1 id="open_issues">Open Issues</h1>
+<% unless @open_issues.nil? %>
+  <% @open_issues.each do |oi| %>
+    <p><%= oi.text %></p>
+  <% end %>
+<% end %>
