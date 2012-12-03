@@ -5,5 +5,5 @@ twitter:
   consumer_secret    : '##################################################'
   oauth_token        : '############=#####################################'
   oauth_token_secret : '#################################################'
-  hashtags           : [ '#ombuduy', '#OMBUDUY', '#OmbudUy', '#OmbudUY', '#ombudUY', '#ombudUy' ]
+  hashtags           : [ '#ombuduy' ]
 
