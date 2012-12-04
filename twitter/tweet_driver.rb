@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'tweetstream'
 require 'yaml'
 require 'json'
@@ -20,11 +21,10 @@ class TweetDriver
   @TweetClient = nil
 
   def initialize
-    
     @config = YAML.load_file('config.yml')
 
     TweetStream.configure do |c|
-      c.consumer_key       = @config['twitter']['consumer_key'] 
+      c.consumer_key       = @config['twitter']['consumer_key']
       c.consumer_secret    = @config['twitter']['consumer_secret']
       c.oauth_token        = @config['twitter']['oauth_token']
       c.oauth_token_secret = @config['twitter']['oauth_token_secret']
@@ -32,7 +32,7 @@ class TweetDriver
     end
 
     Twitter.configure do |c|
-      c.consumer_key       = @config['twitter']['consumer_key'] 
+      c.consumer_key       = @config['twitter']['consumer_key']
       c.consumer_secret    = @config['twitter']['consumer_secret']
       c.oauth_token        = @config['twitter']['oauth_token']
       c.oauth_token_secret = @config['twitter']['oauth_token_secret']
@@ -44,15 +44,14 @@ class TweetDriver
 
   def run
     @client.track(@config['twitter']['hashtags']) do |status|
-
-      unless status.attrs[:user][:screen_name] == 'ombuduy' 
-        if status.attrs[:retweeted_status] 
+      unless status.attrs[:user][:screen_name] == 'ombuduy'
+        if status.attrs[:retweeted_status]
           puts 'es un retweet'
           self.retweet(status)
-        elsif status.attrs[:in_reply_to_status_id_str] 
+        elsif status.attrs[:in_reply_to_status_id_str]
           puts 'es un reply'
           self.reply(status)
-        else 
+        else
           puts 'es uno nuevo'
           self.new(status)
         end
@@ -72,12 +71,11 @@ class TweetDriver
   end
 
   def reply(status)
-
-    unless  status.attrs[:entities].nil? ||  
+    unless  status.attrs[:entities].nil? ||
             status.attrs[:entities][:media].nil? ||
-            status.attrs[:entities][:media][0].nil? ||
-            status.attrs[:entities][:media][0][:media_url_http].nil?
-      img =  status.attrs[:entities][:media][0][:media_url_https]
+            status.attrs[:entities][:media].empty?
+      # TODO: Acá media es un array que puede tener varias imágenes
+      img =  status.attrs[:entities][:media][0][:media_url]
     else
       img = nil
     end
@@ -112,11 +110,10 @@ class TweetDriver
       end
     end
 
-    unless  status.attrs[:entities].nil? ||  
+    unless  status.attrs[:entities].nil? ||
             status.attrs[:entities][:media].nil? ||
-            status.attrs[:entities][:media][0].nil? ||
-            status.attrs[:entities][:media][0][:media_url_http].nil?
-      img =  status.attrs[:entities][:media][0][:media_url_https]
+            status.attrs[:entities][:media].empty?
+      img =  status.attrs[:entities][:media][0][:media_url]
     else
       img = nil
     end
