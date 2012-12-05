@@ -125,14 +125,15 @@ class TweetDriver
       latitude: latitude,
       longitude: longitude,
       tweet_id: status.attrs[:id_str],
-      user_id: status.attrs[:user][:id_str]
+      user_id: status.attrs[:user][:id_str],
+      hashtags: status.attrs[:entities][:hashtags]
     }
 
     puts data
 
     http = EventMachine::HttpRequest.new(url, :head => {'Content-Type' =>'application/json'}).post :body => data
     http.callback {
-      Twitter.update( '@' + status.attrs[:user][:screen_name] + ' tu issue fue creado en ' + @config['api_www'] + http.response + ' #OmbudUy')
+      Twitter.update( '@' + status.attrs[:user][:screen_name] + ' reporte creado en ' + @config['api_www'] + http.response + ' #OmbudUy')
     }
   end
 
