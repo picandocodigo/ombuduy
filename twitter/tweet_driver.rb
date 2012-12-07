@@ -87,6 +87,7 @@ class TweetDriver
       reply_to_id: status.attrs[:in_reply_to_status_id_str],
       user_id: status.attrs[:user][:id_str],
       image_url: img,
+      author: status.attrs[:user][:screen_name]
     }
 
     puts data
@@ -126,7 +127,8 @@ class TweetDriver
       longitude: longitude,
       tweet_id: status.attrs[:id_str],
       user_id: status.attrs[:user][:id_str],
-      hashtags: status.attrs[:entities][:hashtags]
+      hashtags: status.attrs[:entities][:hashtags],
+      author: status.attrs[:user][:screen_name]
     }
 
     puts data
